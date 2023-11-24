@@ -1,9 +1,14 @@
 use std::f64::consts::E;
 
-#[derive(Clone)]
 pub struct ActivationFuncion<'a> {
 	pub function: &'a dyn Fn(f64) -> f64,
 	pub derivative: &'a dyn Fn(f64) -> f64,
+}
+
+impl<'a> Clone for ActivationFuncion<'a> {
+    fn clone(&self) -> Self {
+        Self { function: self.function.clone(), derivative: self.derivative.clone() }
+    }
 }
 
 pub const IDENTITY: ActivationFuncion = ActivationFuncion {
